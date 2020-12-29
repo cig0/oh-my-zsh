@@ -7,13 +7,16 @@ if (( $+commands[minikube] )); then
         minikube completion zsh >! $__MINIKUBE_COMPLETION_FILE
     fi
 
-    lazy-load() {
+    minikube() {
 
       unfunction "$0"
 
       [[ -f $__MINIKUBE_COMPLETION_FILE ]] && source $__MINIKUBE_COMPLETION_FILE
 
       unset __MINIKUBE_COMPLETION_FILE
+
+      # Execute the binary
+      $0 "$@"
 
     }
 

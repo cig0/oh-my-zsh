@@ -5,13 +5,16 @@ if (( $+commands[kubectl] )); then
         kubectl completion zsh >! $__KUBECTL_COMPLETION_FILE
     fi
 
-    lazy-load() {
+    kubectl() {
 
       unfunction "$0"
 
       [[ -f $__KUBECTL_COMPLETION_FILE ]] && source $__KUBECTL_COMPLETION_FILE
 
       unset __KUBECTL_COMPLETION_FILE
+
+      # Execute the binary
+      $0 "$@"
 
     }
 

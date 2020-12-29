@@ -7,13 +7,16 @@ if (( $+commands[helm] )); then
         helm completion zsh >! $__HELM_COMPLETION_FILE
     fi
 
-    lazy-load() {
+    helm() {
 
       unfunction "$0"
 
       [[ -f $__HELM_COMPLETION_FILE ]] && source $__HELM_COMPLETION_FILE
 
       unset __HELM_COMPLETION_FILE
+
+      # Execute the binary
+      $0 "$@"
 
     }
 
